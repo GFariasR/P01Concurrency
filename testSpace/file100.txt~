@@ -1,0 +1,16 @@
+This is another example.
+
+We will add more reference later to this file.
+
+
+1) more files (to continue the recurrency)
+<filename:testSpace/file03.txt>
+<filename:testSpace/file04.txt>
+<filename:testSpace/file05.txt>
+<filename:testSpace/file06.txt>
+
+2) now try some repeated and new
+<filename:testSpace/file03.txt>
+<filename:testSpace/file10.txt>
+<filename:testSpace/file11.txt>
+<filename:testSpace/file06.txt>

@@ -1,0 +1,18 @@
+This is an example to test the ThreadPool.
+Instead of using a parsing to a html page to get href
+we will work with the following reference structure:
+   <filename:testSpace/file02.txt> (which by the way should be parsed now).
+The next version will modify the program to parse:
+href instead of filename
+a domain, instead of testSpace directory, etc
+
+In the meaintime, we will add more test cases:
+
+PENDING
+1) Get the same reference to file01.txt. It should not try again
+2) Get a reference to a non existing file. It should handle it correctly
+3) There is a reference to a file in a diferent directory (it will be the case of external link). It should be ignored.
+
+IMPLEMENTED
+4) get a references to a file file100.txt with 100 other references (filecxx)
+<filename:testSpace/file100.txt>

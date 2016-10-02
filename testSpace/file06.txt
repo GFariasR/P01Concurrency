@@ -1,0 +1,12 @@
+This is another example.
+
+We will add more reference later to this file.
+
+
+1) to files already found
+
+2) to more files (to continue the recurrency)
+<filename:testSpace/file03.txt>
+<filename:testSpace/file04.txt>
+<filename:testSpace/file05.txt>
+<filename:testSpace/file06.txt>
