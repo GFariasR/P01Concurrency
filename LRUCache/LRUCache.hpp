@@ -5,43 +5,31 @@ typedef int val_t;
 
 struct PositionNode{
   key_t key_;
+  val_t val_;
   PositionNode* older_;
   PositionNode* newer_;
 
-  PositionNode(const key_t& key)
+  PositionNode(const key_t& key, const val_t& val)
     : key_(key)
+    , val_(val)
     , older_(nullptr)
     , newer_(nullptr) {
   }
   
-  key_t get_key() const { return key_; }  
-  void set_key(const key_t newkey) {key_= newkey; }  
-};
-
-struct LoadValue{
-  val_t val_;     
-  PositionNode* pos_node_;
-
-  LoadValue(const val_t& val, PositionNode* pos)
-    :val_(val)
-    , pos_node_(pos) {
-  }
-  
-  void set_value(const val_t& val) { val_ = val; }
-  void set_pos_node(PositionNode* pos_node) { pos_node_ = pos_node; }
+  key_t get_key() const { return key_; }
   val_t get_value() const { return val_; }
-  PositionNode* get_pos_node() const {return pos_node_; }
+  void set_key(const key_t key) { key_= key; }
+  void set_value(const val_t val) { val_ = val; }
+  void set_values(const key_t key, const val_t val) {
+    key_= key;
+    val_= val;
+  }
 };
 
 class PositionList{
 public:
-  PositionList(): newest_(nullptr), oldest_(nullptr) {}
-  // to delete all the nodes
-  ~PositionList();
+  PositionList() : newest_(nullptr), oldest_(nullptr) {}
   
-  // add a new key to the list, first position: newest
-  PositionNode* add_new(const key_t& key);
-  // move the node to the fist position
   void update_to_newest(PositionNode* node);
   // get the oldest node
   PositionNode* get_oldest() const { return oldest_; }
@@ -62,7 +50,7 @@ private:
 };
 
 // useful type definitions
-typedef std::unordered_map<key_t, LoadValue*> cache_map_t;
+typedef std::unordered_map<key_t, PositionNode*> cache_map_t;
 typedef cache_map_t::size_type capacity_t;
 
 class CacheTable{
@@ -81,6 +69,8 @@ public:
   key_t get_newest_key() const { return pos_list_.get_newest_key(); }
   // return oldest key, no position updates
   key_t get_oldest_key() const { return pos_list_.get_oldest_key(); }
+  // return oldest node
+  PositionNode* get_oldest_node() const { return pos_list_.get_oldest(); }
   
 private:
   capacity_t capacity_;
