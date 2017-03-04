@@ -5,10 +5,6 @@
  **********************************************************************/
 void CacheTable::insert(const key_t& key, const val_t& val)
 {
-  if (key < 0) {
-    return;    // what are you doing man!
-  }
-  
   // first we need to know if already exists
   auto isInMap = map_.find(key);
   if (isInMap == map_.end()) { 
@@ -20,20 +16,15 @@ void CacheTable::insert(const key_t& key, const val_t& val)
       // the key to be remove from the map
       key_t oldKey = oldNode->get_key();
       // get an iterator find the key on the map first
-      auto iteErase = map_.find(oldKey);    
-      if (iteErase != map_.end()) {
-	// modify the values (instead of delete and new again)
-	oldNode->set_values(key, val);
-	// make this node the newest now
-	pos_list_.update_to_newest(oldNode);     
-	// safe to remove the key, its node is saved in  oldNode
-	map_.erase(iteErase);            
-	// inserted back in the map with new key and value
-        map_.emplace(key, oldNode);          
-      } else {
-	throw "this is weird:"
-	      " no posible to erase a key present on the posList?";
-      }
+      auto iteErase = map_.find(oldKey);
+      // modify the values (instead of delete and new again)
+      oldNode->set_values(key, val);
+      // make this node the newest now
+      pos_list_.update_to_newest(oldNode);     
+      // safe to remove the key, its node is saved in  oldNode
+      map_.erase(iteErase);            
+      // inserted back in the map with new key and value
+      map_.emplace(key, oldNode);          
     } else {   //  there is room in cache, so add it
       // creates a new node
       PositionNode* posNode = new PositionNode(key, val);  

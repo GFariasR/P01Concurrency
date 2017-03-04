@@ -1,0 +1,10 @@
+# ignore emacs backup files
+*~
+
+#ignore gcov and lcov files
+*.gcda
+*.gcno
+*.info
+
+#ignore objects files
+*.o
